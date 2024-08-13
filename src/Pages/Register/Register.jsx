@@ -1,16 +1,34 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useForm } from "react-hook-form";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const [passwordError, setPasswordError] = useState("");
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
+
+  const validatePassword = (password) => {
+    let error = "";
+    if (!/[A-Z]/.test(password)) {
+      error = "Password must contain an uppercase letter";
+    } else if (!/[a-z]/.test(password)) {
+      error = "Password must contain a lowercase letter";
+    } else if (password.length < 6) {
+      error = "Password must be at least 6 characters";
+    }
+    setPasswordError(error);
+    return error === "";
+  };
+
   const onSubmit = (data) => {
     const { email, password } = data;
+    if (!validatePassword(password)) {
+      return;
+    }
     createUser(email, password)
       .then((result) => {
         console.log("User created successfully:", result.user);
@@ -68,7 +86,11 @@ const Register = () => {
                   })}
                   placeholder="password"
                   className="input input-bordered"
+                  onChange={(e) => validatePassword(e.target.value)}
                 />
+                {passwordError && (
+                  <span className="text-red-600">{passwordError}</span>
+                )}
                 {errors.password && (
                   <span className="text-red-600">
                     {errors.password.message}
