@@ -4,7 +4,9 @@ import Navbar from "../Shared/Navbar/Navbar";
 const Root = () => {
   return (
     <div>
-      <Navbar />
+      <div className="mt-10">
+        <Navbar />
+      </div>
       <Outlet />
     </div>
   );

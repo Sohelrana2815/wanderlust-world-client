@@ -3,7 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useForm } from "react-hook-form";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [passwordError, setPasswordError] = useState("");
   const {
     handleSubmit,
@@ -25,13 +25,18 @@ const Register = () => {
   };
 
   const onSubmit = (data) => {
-    const { email, password } = data;
+    const { name, email, password, photoURL } = data;
     if (!validatePassword(password)) {
       return;
     }
     createUser(email, password)
       .then((result) => {
         console.log("User created successfully:", result.user);
+        // Update the user profile with display name and photo URL
+        return updateUserProfile(name, photoURL);
+      })
+      .then(() => {
+        console.log("User profile updated successfully");
         // Optionally, save the name to the user profile or database
       })
       .catch((error) => {
@@ -107,7 +112,7 @@ const Register = () => {
                   <span className="label-text">Photo URL</span>
                 </label>
                 <input
-                  type="text"
+                  type="te"
                   {...register("photoURL", {
                     required: "Photo URL is required",
                     pattern: {

@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
   const navLinks = (
     <>
       <li>
@@ -57,7 +60,15 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {/*  */}
+          <div
+            className="avatar tooltip"
+            data-tip={user ? user?.displayName : ""}
+          >
+            <div className="w-10 rounded-full">
+              <img src={user ? user?.photoURL : ""} alt="User Profile" />
+            </div>
+          </div>
         </div>
       </div>
     </>
