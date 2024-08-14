@@ -38,6 +38,10 @@ const Register = () => {
         console.error("Error creating user:", error);
       });
   };
+
+  // Regex pattern for validating photo URL
+  const photoURLPattern =
+    /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|bmp|svg))$/i;
   return (
     <>
       <div className="hero bg-base-200 min-h-screen ">
@@ -97,6 +101,32 @@ const Register = () => {
                   </span>
                 )}
               </div>
+              {/* photo URL */}
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("photoURL", {
+                    required: "Photo URL is required",
+                    pattern: {
+                      value: photoURLPattern,
+                      message:
+                        "Invalid photo URL. Please provide a valid URL ending with an image extension like .jpg, .png, etc.",
+                    },
+                  })}
+                  placeholder="Photo URL"
+                  className="input input-bordered"
+                />
+
+                {errors.photoURL && (
+                  <span className="text-red-600">
+                    {errors.photoURL.message}
+                  </span>
+                )}
+              </div>
+
               <div className="form-control mt-6">
                 <input
                   type="submit"
