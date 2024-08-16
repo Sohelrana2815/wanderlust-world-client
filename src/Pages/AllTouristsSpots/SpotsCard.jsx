@@ -1,31 +1,7 @@
 import { Link } from "react-router-dom";
 
-const TouristSpotsCard = ({ touristSpot }) => {
-  // //
-  // name
-  // "a"
-  // touristSpot
-  // "c"
-  // countryName
-  // "e"
-  // location
-  // "g"
-  // description
-  // "hello"
-  // email
-  // "bal@sal.com"
-  // season
-  // "d"
-  // travelTime
-  // "f"
-  // visitor
-  // "1000"
-  // cost
-  // "2000"
-  // photoURL
-  // "png"
-  const { name, photoURL, countryName, description, _id } = touristSpot;
-
+const SpotsCard = ({ spotData }) => {
+  const { name, photoURL, countryName, description, _id } = spotData;
   return (
     <>
       <div className="card card-compact bg-base-100 w-96 shadow-xl">
@@ -46,4 +22,4 @@ const TouristSpotsCard = ({ touristSpot }) => {
   );
 };
 
-export default TouristSpotsCard;
+export default SpotsCard;

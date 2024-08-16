@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const AddTouristsSpots = () => {
+  const { user } = useContext(AuthContext);
+  // console.log(user.email);
   const [formData, setFormData] = useState({
-    name: "",
     touristSpot: "",
     countryName: "",
     location: "",
     description: "",
-    email: "",
     season: "",
     travelTime: "",
     visitor: "",
@@ -25,8 +26,11 @@ const AddTouristsSpots = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-
+    const dataToSend = {
+      ...formData,
+      email: user.email,
+    };
+    console.log("this is email", dataToSend);
     // send data to the server
 
     fetch("http://localhost:5000/spots", {
@@ -34,7 +38,7 @@ const AddTouristsSpots = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(dataToSend),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -56,20 +60,6 @@ const AddTouristsSpots = () => {
               <div className="flex flex-wrap">
                 {/* First Column */}
                 <div className="w-full md:w-1/2 px-2">
-                  {/* photo */}
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">User Name</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Enter your name"
-                      className="input input-bordered"
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                  </div>
                   {/* spot name */}
                   <div className="form-control">
                     <label className="label">
@@ -127,27 +117,8 @@ const AddTouristsSpots = () => {
                     />
                   </div>
                 </div>
-
                 {/* Second Column */}
                 <div className="w-full md:w-1/2 px-2">
-                  {/* average cost */}
-
-                  <div className="form-control">
-                    <label className="label">
-                      <span className="label-text">User email</span>
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      className="input input-bordered"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  {/*  */}
-
                   {/* seasonality */}
                   <div className="form-control">
                     <label className="label">
@@ -206,7 +177,7 @@ const AddTouristsSpots = () => {
                   </div>
                 </div>
               </div>
-              {/* Photo */}
+              {/* Photo URL */}
               <div className="form-control w-full">
                 <label className="label">
                   <span className="label-text">Photo URL</span>

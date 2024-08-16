@@ -13,13 +13,13 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink>All Tourists Spot</NavLink>
+        <NavLink to="/allTouristSpots">All Tourists Spot</NavLink>
       </li>
       <li>
         <NavLink to="/addTourist">Add Tourists Spot</NavLink>
       </li>
       <li>
-        <NavLink>My List</NavLink>
+        <NavLink to="/myList">My List</NavLink>
       </li>
       <li>
         <NavLink to="/login">Login</NavLink>
@@ -57,7 +57,9 @@ const Navbar = () => {
               {navLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Wanderlust World</a>
+          <Link to="/">
+            <h1 className="btn btn-ghost text-xl">Wanderlust World</h1>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
