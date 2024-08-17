@@ -9,6 +9,7 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 import AllTouristsSpots from "../Pages/AllTouristsSpots/AllTouristsSpots";
 import MyList from "../Pages/MyList/MyList";
+import UpdateSpot from "../Pages/UpdateSpot/UpdateSpot";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
             <MyList />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/update/:id",
+        element: <UpdateSpot />,
       },
     ],
   },
