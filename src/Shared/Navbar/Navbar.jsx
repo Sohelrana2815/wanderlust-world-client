@@ -4,7 +4,24 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink></NavLink>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="$">All Tourists Spot</NavLink>
+      </li>
+      <li>
+        <NavLink to="$">Add Tourists Spot</NavLink>
+      </li>
+      <li>
+        <NavLink to="$">My List</NavLink>
+      </li>
+
+      <li>
+        <NavLink to="$">Login</NavLink>
+      </li>
+
+      <li>
+        <NavLink to="$">Sign Up</NavLink>
       </li>
     </>
   );
