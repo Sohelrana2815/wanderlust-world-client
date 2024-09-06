@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const handleLogout = () => {
+    logout();
+  };
   const navLinks = (
     <>
       <li>
@@ -52,16 +58,43 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/login">
-          <button className="btn  bg-gradient-to-r from-purple-500 to-pink-500  rounded-3xl hover:bg-gradient-to-l focus:outline-none focus:shadow-outline text-white ">
-            Login
-          </button>
-        </Link>
-        <Link to="/signUp">
-          <button className="btn ml-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl  hover:bg-gradient-to-l focus:outline-none focus:shadow-outline text-white">
-            Sign Up
-          </button>
-        </Link>
+        {user ? (
+          <div className="dropdown dropdown-bottom">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li onClick={handleLogout}>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <Link to="/login">
+              <button className="btn  bg-gradient-to-r from-purple-500 to-pink-500  rounded-3xl hover:bg-gradient-to-l focus:outline-none focus:shadow-outline text-white ">
+                Login
+              </button>
+            </Link>
+            <Link to="/signUp">
+              <button className="btn ml-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl  hover:bg-gradient-to-l focus:outline-none focus:shadow-outline text-white">
+                Sign Up
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
