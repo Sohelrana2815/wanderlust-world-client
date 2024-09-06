@@ -15,14 +15,6 @@ const Navbar = () => {
       <li>
         <NavLink to="$">My List</NavLink>
       </li>
-
-      <li>
-        <NavLink to="$">Login</NavLink>
-      </li>
-
-      <li>
-        <NavLink to="$">Sign Up</NavLink>
-      </li>
     </>
   );
   return (
@@ -53,14 +45,23 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/">
-          <a className="btn btn-ghost text-xl">Wanderlust world</a>
+          <p className="btn btn-ghost text-xl">Wanderlust world</p>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Contact Us</a>
+        <Link to="/login">
+          <button className="btn  bg-gradient-to-r from-purple-500 to-pink-500  rounded-3xl hover:bg-gradient-to-l focus:outline-none focus:shadow-outline text-white ">
+            Login
+          </button>
+        </Link>
+        <Link to="/signUp">
+          <button className="btn ml-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl  hover:bg-gradient-to-l focus:outline-none focus:shadow-outline text-white">
+            Sign Up
+          </button>
+        </Link>
       </div>
     </div>
   );
