@@ -3,6 +3,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa6";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -107,6 +109,16 @@ const SignUp = () => {
           <Link to="/login" className="text-purple-500 font-medium">
             Login
           </Link>
+        </p>
+        <p className="text-center">-----OR-----</p>
+        {/* icons */}
+        <p className="flex justify-center gap-4">
+          <button className="btn btn-sm rounded-full">
+            <FcGoogle className="text-2xl " />
+          </button>
+          <button className="btn btn-sm rounded-full">
+            <FaGithub className="text-2xl " />
+          </button>
         </p>
       </div>
     </form>

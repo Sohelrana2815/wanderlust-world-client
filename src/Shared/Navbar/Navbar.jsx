@@ -69,8 +69,8 @@ const Navbar = () => {
                 {/* Add 'tooltip' and 'tooltip-bottom' classes for the tooltip */}
                 <img
                   alt="Profile Picture"
-                  src={user ? user.photoURL : null}
-                  title={user ? user.displayName : ""}
+                  src={user?.photoURL}
+                  title={user.displayName}
                 />
               </div>
             </div>
