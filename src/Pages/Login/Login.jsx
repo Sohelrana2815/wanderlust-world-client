@@ -1,5 +1,7 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
@@ -13,7 +15,7 @@ const Login = () => {
 
     login(email, password)
       .then((result) => {
-        console.log('Login user',result.user);
+        console.log("Login user", result.user);
       })
       .catch((error) => {
         console.log(error);
@@ -52,6 +54,12 @@ const Login = () => {
           type="submit"
           className="w-full px-4 py-2 font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:bg-gradient-to-l focus:outline-none focus:shadow-outline"
         />
+        <p className="text-center">
+          Don't have an account ?{" "}
+          <Link to="/signUp" className="text-pink-500 font-medium">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </form>
   );
