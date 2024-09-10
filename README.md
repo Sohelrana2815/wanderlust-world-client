@@ -1,8 +1,21 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Web App Name : Wanderlust World 
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+## Features
+
+- Beautiful banner
+- Dark mode
+- Login
+- Signup
+- Api
+
+
+## WEBSITE LIVE URL
+1. https://wanderlust-world-e22f6.web.app/
+2. https://wanderlust-world-e22f6.firebaseapp.com/
+
+
+

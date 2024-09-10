@@ -4,6 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { login, googleSignIn } = useContext(AuthContext);
@@ -20,6 +21,15 @@ const Login = () => {
     login(email, password)
       .then((result) => {
         console.log("Login user", result.user);
+        setError("");
+      })
+      .then(() => {
+        Swal.fire(
+          "Success!",
+          "Welcome back! You have successfully logged in.",
+          "success"
+        );
+        console.log("Profile Updated successfully");
         setError("");
       })
       .catch((error) => {

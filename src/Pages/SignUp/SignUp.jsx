@@ -1,13 +1,15 @@
-/* eslint-disable react/no-unescaped-entities */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa6";
+import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -18,6 +20,16 @@ const SignUp = () => {
     const password = form.password.value;
     const displayName = `${firstName} ${lastName}`;
     const photoURL = form.photoURL.value;
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must contain at least 6 characters, including one uppercase letter and one lowercase letter."
+      );
+      return;
+    }
+
     const signUpInfo = {
       firstName,
       lastName,
@@ -37,9 +49,16 @@ const SignUp = () => {
         });
       })
       .then(() => {
+        Swal.fire(
+          "Success!",
+          "Your account has been created successfully! Welcome aboard.",
+          "success"
+        );
         console.log("Profile Updated successfully");
+        setError("");
       })
       .catch((error) => {
+        setError(error.message);
         console.log(error);
       });
   };
@@ -50,7 +69,11 @@ const SignUp = () => {
     >
       <div className="w-full max-w-sm p-10 py-10 space-y-4 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center">Sign Up</h2>
-
+        {error && (
+          <p className="mb-4 text-base font-medium  text-red-500 text-center">
+            {error}
+          </p>
+        )}
         <div>
           <label className="block mb-2 text-sm font-bold text-gray-700">
             First Name
@@ -87,9 +110,17 @@ const SignUp = () => {
           </label>
           <input
             className="w-full px-3 py-2 mb-3 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="password"
+            type={showPassword ? "text" : "password"} // Toggle input type
             name="password"
           />
+          <div className="relative">
+            <span
+              className="absolute bottom-[22px] cursor-pointer  right-2 text-base "
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Toggle icon */}
+            </span>
+          </div>
         </div>
         <div>
           <label className="block mb-2 text-sm font-bold text-gray-700">
