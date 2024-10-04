@@ -2,12 +2,34 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 
+const validate = (values) => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = "Required";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address";
+  }
+  if (!values.password) {
+    errors.password = "Required";
+  } else if (!/[a-z]/.test(values.password)) {
+    errors.password = "Password requires a lowercase letter";
+  } else if (!/[A-Z]/.test(values.password)) {
+    errors.password = "Password requires a uppercase letter";
+  } else if (!/[0-9]/.test(values.password)) {
+    errors.password = "Password requires a number";
+  } else if (!/.{6,20}/.test(values.password)) {
+    errors.password = "Password must be between 6 and 20 characters long";
+  }
+  return errors;
+};
+
 const Login = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validate,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -35,6 +57,9 @@ const Login = () => {
                 className="input input-bordered"
                 required
               />
+              {formik.errors.email ? (
+                <p className="text-red-600">{formik.errors.email}</p>
+              ) : null}
             </div>
             <div className="form-control">
               <label className="label">
@@ -49,6 +74,9 @@ const Login = () => {
                 className="input input-bordered"
                 required
               />
+              {formik.errors.password ? (
+                <p className="text-red-600">{formik.errors.password}</p>
+              ) : null}
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
                   Forgot password?
